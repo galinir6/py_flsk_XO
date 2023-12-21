@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block title %}Game{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .important {
+        color: #336699;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1>Tic Tac Toe</h1>
+<br>
+<h2 id="msg"></h2>
+<br>
+<div onclick="play()" id="gameboard">
+    <button id="btn1" style="width: 100px; height: 100px;">-</button>
+    <button id="btn2" style="width: 100px; height: 100px;">-</button>
+    <button id="btn3" style="width: 100px; height: 100px;">-</button><br>
+
+    <button id="btn4" style="width: 100px; height: 100px;">-</button>
+    <button id="btn5" style="width: 100px; height: 100px;">-</button>
+    <button id="btn6" style="width: 100px; height: 100px;">-</button><br>
+
+    <button id="btn7" style="width: 100px; height: 100px;">-</button>
+    <button id="btn8" style="width: 100px; height: 100px;">-</button>
+    <button id="btn9" style="width: 100px; height: 100px;">-</button>
+
+</div>
+
+<br><br>
+
+<button id="restartButton" class="btn btn-warning" onclick="restart()">Restart game</button>
+<script>
+
+    let turn = 'X'
+    let counter = 0
+
+    const play = () => {
+        if (event.target.innerText == '-') {
+            event.target.innerText = turn
+
+            turn = (turn == 'X' ? 'O' : 'X')
+            msg.innerHTML = ` Turn of player ${turn}`
+            counter++
+
+            if (counter == 9) {
+                msg.innerHTML = 'Tie!'
+            }
+
+        }
+        checkWin()
+
+    }
+
+
+    const checkWin = () => {
+        if (btn1.innerText == "X" && btn2.innerText == "X" && btn3.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn1.innerText == "O" && btn2.innerText == "O" && btn3.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+        if (btn4.innerText == "X" && btn5.innerText == "X" && btn6.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn4.innerText == "O" && btn5.innerText == "O" && btn6.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+        if (btn7.innerText == "X" && btn8.innerText == "X" && btn9.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn7.innerText == "O" && btn8.innerText == "O" && btn9.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+        if (btn1.innerText == "X" && btn4.innerText == "X" && btn7.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn1.innerText == "O" && btn4.innerText == "O" && btn7.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+        if (btn2.innerText == "X" && btn5.innerText == "X" && btn8.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn2.innerText == "O" && btn5.innerText == "O" && btn8.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+        if (btn3.innerText == "X" && btn6.innerText == "X" && btn9.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn3.innerText == "O" && btn6.innerText == "O" && btn9.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+        if (btn1.innerText == "X" && btn5.innerText == "X" && btn9.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn1.innerText == "O" && btn5.innerText == "O" && btn9.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+
+        if (btn3.innerText == "X" && btn5.innerText == "X" && btn7.innerText == "X") {
+            msg.innerHTML = `The winner is ${"X"}`
+        } else if (btn3.innerText == "O" && btn5.innerText == "O" && btn7.innerText == "O") {
+            msg.innerHTML = `The winner is ${"O"}`
+        }
+
+    }
+
+    const restart = () => {
+        const restartButton = document.getElementById('restartButton');
+        restartButton.addEventListener('click', function () {
+            // Clear the board
+            document.querySelectorAll('#gameboard button').forEach(button => button.innerText = '-');
+
+            // Reset other variables and messages
+            turn = 'X';
+            counter = 0;
+            msg.innerHTML = '';
+        });
+    }
+
+</script>
+{% endblock %}
